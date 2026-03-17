@@ -1,0 +1,24 @@
+services:
+  faster-qwen3-tts:
+    image: faster-qwen3-tts-demo:latest
+    container_name: faster-qwen3-tts
+    user: "root"
+    stdin_open: true
+    tty: true
+    network_mode: host
+    environment:
+      PORT: "8000"
+      QWEN_TTS_REF_AUDIO: "lesson-of-worth-helen-mirren.wav"
+      QWEN_TTS_REF_TEXT: "I'm worth it. Those words get better with age. But they're still radical, unfortunately."
+      HF_HOME: "/cache"
+      USE_FLASH_ATTENTION: "false"
+      NVIDIA_VISIBLE_DEVICES: "all"
+      NVIDIA_DRIVER_CAPABILITIES: "compute,utility"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped

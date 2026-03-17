@@ -20,5 +20,4 @@ RUN python3 -m pip install --upgrade pip \
     && python3 -m pip install "faster-qwen3-tts[demo]" \
     && python3 -m pip install -r requirements.txt
 
-EXPOSE 7860
-CMD ["python3", "server.py", "--host", "0.0.0.0"]
+CMD ["python3", "openai_server.py", "--host", "0.0.0.0"]
