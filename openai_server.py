@@ -184,8 +184,12 @@ async def _stream_chunks(voice_cfg: dict, text: str) -> AsyncGenerator[bytes, No
                     language=voice_cfg.get("language", "Auto"),
                     ref_audio=voice_cfg["ref_audio"],
                     ref_text=voice_cfg.get("ref_text", ""),
-                    chunk_size=voice_cfg.get("chunk_size", 12),
+                    chunk_size=voice_cfg.get("chunk_size", 8),
                     non_streaming_mode=False,
+                    xvec_only=voice_cfg.get("xvec_only", False),
+                    temperature=voice_cfg.get("temperature", 0.9),
+                    top_k=voice_cfg.get("top_k", 50),
+                    repetition_penalty=voice_cfg.get("repetition_penalty", 1.05),
                 ):
                     q.put(chunk)
         except Exception as exc:
@@ -249,6 +253,10 @@ async def create_speech(req: SpeechRequest):
                     language=voice_cfg.get("language", "Auto"),
                     ref_audio=voice_cfg["ref_audio"],
                     ref_text=voice_cfg.get("ref_text", ""),
+                    xvec_only=voice_cfg.get("xvec_only", False),
+                    temperature=voice_cfg.get("temperature", 0.9),
+                    top_k=voice_cfg.get("top_k", 50),
+                    repetition_penalty=voice_cfg.get("repetition_penalty", 1.05),
                 )
 
         audio_arrays, sr = await loop.run_in_executor(None, _generate)
