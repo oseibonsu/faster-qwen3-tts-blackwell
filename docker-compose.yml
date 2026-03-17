@@ -7,7 +7,7 @@ services:
     tty: true
     network_mode: host
     environment:
-      PORT: "8000"
+      PORT: "8880"
       QWEN_TTS_REF_AUDIO: "lesson-of-worth-helen-mirren.wav"
       QWEN_TTS_REF_TEXT: "I'm worth it. Those words get better with age. But they're still radical, unfortunately."
       HF_HOME: "/cache"

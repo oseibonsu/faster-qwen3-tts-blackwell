@@ -78,7 +78,7 @@ _model_lock = threading.Lock()  # prevent concurrent GPU inference
 class SpeechRequest(BaseModel):
     model: str = "tts-1"
     input: str
-    voice: str = "alloy"
+    voice: str = "helen_mirren"
     response_format: str = "wav"  # wav | pcm | mp3
     speed: float = 1.0           # accepted but not yet applied
 
@@ -322,13 +322,13 @@ def main():
         logger.info("Loaded %d voice(s) from %s", len(voices), args.voices)
     elif args.ref_audio:
         voices = {
-            "default": {
+            "helen_mirren": {
                 "ref_audio": args.ref_audio,
                 "ref_text": args.ref_text,
                 "language": args.language,
             }
         }
-        default_voice = "default"
+        default_voice = "helen_mirren"
         logger.info("Using single voice from --ref-audio: %s", args.ref_audio)
     else:
         print(
